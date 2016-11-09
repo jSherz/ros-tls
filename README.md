@@ -13,10 +13,7 @@ to answer a DNS ACME challenge.
 created for your desired domain name.
 
 * [IAM credentials](http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html) have been created
-that can edit the above zone.
-
-* The boto3 library can [pick up AWS credentials](https://boto3.readthedocs.io/en/latest/guide/quickstart.html#configuration)
-for your Route53 zone.
+that can edit the above zone. These credentials must be available to `lego`.
 
 * You have an SSH key setup for the configured RouterOS user.
 
