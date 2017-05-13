@@ -38,9 +38,9 @@ def renew_certificate(lego_exe_path, host, email):
         [lego_exe_path, '--domains', host, '--email', email, '--accept-tos', '--dns', 'route53', 'run'])
 
     if result == 0:
-        print(Fore.GREEN + '--> Renewed certificate!')
+        print(Fore.GREEN + '--> Renewed certificate!' + Fore.RESET)
     else:
-        print(Fore.RED + '--> Failed to renew certificate!')
+        print(Fore.RED + '--> Failed to renew certificate!' + Fore.RESET)
 
 
 def connect_via_ssh(ssh_user, ssh_key_path):
@@ -148,7 +148,7 @@ def replace_certificate(ssh_user, ssh_key_path, host):
 
         client.close()
     else:
-        print(Fore.RED + '--> Could not find certificate')
+        print(Fore.RED + '--> Could not find certificate' + Fore.RESET)
 
 
 print('ros-tls ' + Style.BRIGHT + 'v' + __VERSION__ + Style.RESET_ALL)
@@ -171,4 +171,4 @@ for host in HOSTS:
         renew_certificate(lego_exe_path, host, ADMIN_EMAIL)
         replace_certificate(SSH_USER, SSH_KEY_PATH, host)
     except requests.exceptions.ConnectionError:
-        exit(Fore.RED + 'Failed to lookup host %s!' % host)
+        exit((Fore.RED + 'Failed to lookup host %s!' + Fore.RESET) % host)
