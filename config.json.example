@@ -1,0 +1,9 @@
+{
+  "hosts": [ 
+    "ros.device.domain.com",
+    "ros.device2.domain.com"
+  ],
+  "adminEmail": "me@domain.com",
+  "sshUser": "myuser",
+  "sshKeyPath": "/home/myuser/.ssh/id_rsa"
+}

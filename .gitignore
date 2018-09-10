@@ -1,3 +1,5 @@
 .lego/
 .idea/
 ssh.log
+config.json
+venv/

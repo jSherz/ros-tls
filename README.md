@@ -20,6 +20,11 @@ that can edit the above zone. These credentials must be available to `lego`.
 ## Running the script
 
 ```bash
+cp config.json.example config.json
+vim config.json
+```
+
+```bash
 pip install -r requirements.txt
 python3 ros-tls.py
 ```
