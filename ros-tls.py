@@ -93,7 +93,7 @@ def get_current_certificate(client):
 
         return None
     else:
-        if certificates[0] != '*1':
+        if certificates[0] != '*1' and certificates[0] != 'none':
             print('--> Configured to use certificate "%s"' % certificates[0])
 
             return certificates[0]
