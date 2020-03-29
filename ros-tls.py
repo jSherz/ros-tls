@@ -83,7 +83,7 @@ def upload_key(host, sftp_client, private_key_path):
 
 
 def get_current_certificate(client):
-    client.exec_command('/ip service print detail where name=www-ssl')
+    _, stdout, stderr = client.exec_command('/ip service print detail where name=www-ssl')
 
     output = ''.join(stdout.readlines())
     certificates = MATCH_CERTIFICATE.findall(output)
