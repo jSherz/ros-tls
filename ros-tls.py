@@ -1,5 +1,7 @@
 #!/bin/env python3
+import datetime
 
+import OpenSSL
 from colorama import init, Fore, Style
 from paramiko.client import SSHClient
 import paramiko
@@ -10,8 +12,10 @@ import subprocess
 import re
 import json
 import sys
+import ssl
 
 init()
+
 
 #
 # Configuration
@@ -181,7 +185,21 @@ def check_hosts():
         try:
             requests.get('https://' + host)
 
-            print('-> Certificate appears to be OK - doing nothing')
+            certificate = ssl.get_server_certificate((host, 443))
+            parsed_certificate = OpenSSL.crypto.load_certificate(OpenSSL.crypto.FILETYPE_PEM, certificate)
+
+            not_after = datetime.datetime.strptime(parsed_certificate.get_notAfter().decode('utf-8'), "%Y%m%d%H%M%SZ")
+            now = datetime.datetime.now()
+
+            if not_after - now <= datetime.timedelta(days=15):
+                print('-> Certificate needs renewing (expires soon)')
+
+                renewed = renew_certificate(host, lego_exe_path, config['adminEmail'])
+
+                if renewed:
+                    replace_certificate(host, config['sshUser'], config['sshKeyPath'])
+            else:
+                print('-> Certificate appears to be OK - doing nothing')
         except requests.exceptions.SSLError:
             print('-> Certificate needs renewing (or other SSL error)')
 
