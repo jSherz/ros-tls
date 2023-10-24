@@ -61,7 +61,7 @@ def renew_certificate(host, lego_exe_path, email):
 def connect_via_ssh(host, ssh_user, ssh_key_path):
     client = SSHClient()
     client.load_system_host_keys()
-    client.connect(host, username=ssh_user, key_filename=ssh_key_path, allow_agent=False, look_for_keys=False, disabled_algorithms=dict(pubkeys=['rsa-sha2-512', 'rsa-sha2-256']))
+    client.connect(host, username=ssh_user, key_filename=ssh_key_path, allow_agent=False, look_for_keys=False)
 
     return client
 
