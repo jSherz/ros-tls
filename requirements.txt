@@ -1,6 +1,6 @@
 acme==2.6.0
 ansible==8.5.0
-ansible-core==2.14.11
+ansible-core==2.15.8
 appdirs==1.4.4
 argcomplete==2.0.0
 arrow==1.2.3
